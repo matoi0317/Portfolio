@@ -15,7 +15,7 @@
       <div class="about-section">
         <h2>About Me</h2>
         <hr />
-        <p>茨城県つくば市在住の女子大生です。茨城県立並木中等教育学校卒業、現在は津田塾大学総合政策学部総合政策学科に所属しています。Web制作、フロントエンド開発が好きです。使える言語はPython・Javascriptです。</p>
+        <p>茨城県つくば市在住の女子大生です。茨城県立並木中等教育学校卒業、現在は津田塾大学総合政策学部総合政策学科に所属しています。Web制作、フロントエンド開発が好きです！使える言語はPython・Javascriptです。</p>
         <div class="social-icons">
           <i class="fab fa-instagram"></i>
           <i class="fab fa-twitter"></i>

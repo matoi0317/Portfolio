@@ -11,13 +11,34 @@
           </div>
         </div>
       </div>
+
       <div v-if="isModalOpen" class="modal" @click="closeModal">
-        <div class="modal-content" @click.stop>
-          <span class="close-button" @click="closeModal">&times;</span>
-          <img :src="modalImage" class="modal-image">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+            <p class="modal-card-title">うんち出たよと教え隊！</p>
+            <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <h1>概要</h1>
+                <p>犬がトイレをしたかどうか確認するのが面倒だったため、画像認識技術を利用し、犬のトイレを検知するシステムを開発。犬がトイレをした後にはLINEに通知が来るようにした。</p><br>
+                <h1>開発</h1>
+                <li>Python</li>
+                <li>RaspberryPi</li>
+                <li>LINE Notify</li>
+                <br>
+                <h1>受賞歴</h1>
+                <li>第62回日本学生科学賞入選2等</li>
+            </section>
+            <footer class="modal-card-foot">
+            <div class="buttons">
+                <button class="button is-success is-outlined is-rounded">Save changes</button>
+                <button class="button is-rounded">Cancel</button>
+            </div>
+            </footer>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
   </template>
   
   <script>
@@ -124,29 +145,39 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
+    .modal-card {
+        .delete {
+            margin-right: 20px;
+        }
+        .modal-card-body {
+            padding: 20px;
+            h1 {
+                font-weight: bold;
+                font-size: 24px;
+            }
+            p {
+                text-indent: 1em;
+                padding: 10px 0;
+            }
+            li {
+                padding: 5px 0;
+            }
+        }
+        .modal-card-title {
+            padding: 30px 20px;
+            font-weight: bold;
+        }
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            button {
+            padding: 10px;
+            margin: 10px;
+        }
+        }
+    }
   }
-  
-  .modal-content {
-    position: relative;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 80%;
-    max-height: 80%;
-    overflow: auto;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
-    cursor: pointer;
-  }
-  
-  .modal-image {
-    width: 100%;
-    height: auto;
-  }
+
+
   </style>
   
