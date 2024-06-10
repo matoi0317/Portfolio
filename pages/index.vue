@@ -7,6 +7,7 @@
         <div class="buttons">
             <button @click="$router.push('/')" class="button is-primary is-outlined is-rounded">HOME</button>
             <button @click="$router.push('/works')" class="button is-primary is-outlined is-rounded">WORKS</button>
+            <button  class="button is-primary is-outlined is-rounded"><a href="https://github.com/matoi0317">GitHub</a></button>
         </div>
     </div>
     <div class="main-container">
@@ -29,8 +30,14 @@
             <li>Voice Recognition</li>
           </div>
         </div>
+        <div class="another">
+          <h1 class="another-title">Other</h1>
+          <li>Rice Plant</li>
+          <li>Kalimba (No musical experience. I can't read music scores. Super beginner.)</li>
+        </div>
       </div>
-      <div class="container-image"></div>
+      <div class="container-image">
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +64,9 @@ export default {
         margin: 20px;
         display: flex;
         justify-content: flex-end;
+        a {
+          color: #03D1B2;
+        }
         button {
             // margin: 20px;
             margin: 0 20px 0 0;
@@ -137,6 +147,20 @@ export default {
           font-size: 18px;
         }
       }
+    }
+
+    .another {
+      width: 100%;
+      margin: 20px 40px;
+      .another-title {
+        color: #A6BBCC;
+          font-family: "Archivo Black", sans-serif;
+          font-size: 18px;
+      }
+      li {
+          padding: 10px 0;
+          color: #A6BBCC;
+        }
     }
   }
 }
