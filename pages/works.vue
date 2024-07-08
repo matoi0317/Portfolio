@@ -1,50 +1,45 @@
 <template>
-    <div>
-      <GlobalHeader />
-      <div class="container">
-        <img src="../static/unti.png" class="slide-in-left main-image" @click="openModal('unti')">
-        <div class="side-images">
-          <img src="../static/face.png" class="slide-in-left small-image" @click="openModal('face')">
-          <div class="vertical-images">
-            <img src="../static/syaberitai.png" class="slide-in-right small-image" style="margin-top: 50px;" @click="openModal('syaberitai')">
-            <img src="../static/wakarutte.png" class="slide-in-right small-image" style="margin-top: 50px;" @click="openModal('wakarutte')">
-          </div>
-        </div>
-      </div>
-  
-      <div v-if="isModalOpen" class="modal" @click="closeModal">
-        <div class="modal-background"></div>
-        <div class="modal-card" @click.stop>
-          <header class="modal-card-head">
-            <p class="modal-card-title">{{ modalContent.title }}</p>
-            <button class="delete" aria-label="close" @click="closeModal"></button>
-          </header>
-          <section class="modal-card-body">
-            <h1>概要</h1>
-            <p>{{ modalContent.description }}</p><br>
-            <h1>開発</h1>
-            <li v-for="tech in modalContent.tech" :key="tech">{{ tech }}</li>
-            <br>
-            <!-- <h1>Photo</h1>
-            <div class="modal-images">
-              <img v-for="img in modalContent.images" :src="img" class="modal-image"><br>
-            </div> -->
-            <h1>受賞歴</h1>
-            <li v-for="award in modalContent.awards" :key="award">{{ award }}</li>
-          </section>
-          <footer class="modal-card-foot">
-            <div class="buttons">
-              <a :href="modalContent.github" v-if="modalContent.github" target="_blank" class="button is-primary is-rounded">View on GitHub</a>
-
-            </div>
-          </footer>
+  <div>
+    <GlobalHeader />
+    <div class="portfolio-container">
+      <div v-for="item in sortedPortfolioItems" :key="item.id" class="portfolio-item">
+        <img :src="item.thumbnail" class="portfolio-thumbnail" />
+        <div class="portfolio-details">
+          <h2 class="portfolio-title">{{ item.title }}</h2>
+          <p class="portfolio-date">{{ item.date }}</p>
+          <p class="portfolio-description">{{ item.overview }}</p>
+          <button @click="openModal(item)">詳しく見る</button>
         </div>
       </div>
     </div>
-  </template>
-  
-  
-  <script>
+
+    <div v-if="isModalOpen" class="modal" @click="closeModal">
+      <div class="modal-background"></div>
+      <div class="modal-card" @click.stop>
+        <header class="modal-card-head">
+          <p class="modal-card-title">{{ modalContent.title }}</p>
+          <button class="delete" aria-label="close" @click="closeModal"></button>
+        </header>
+        <section class="modal-card-body">
+          <h1>概要</h1>
+          <p>{{ modalContent.description }}</p><br>
+          <h1>開発</h1>
+          <li v-for="tech in modalContent.tech" :key="tech">{{ tech }}</li>
+          <br>
+          <h1>受賞歴</h1>
+          <li v-for="award in modalContent.awards" :key="award">{{ award }}</li>
+        </section>
+        <footer class="modal-card-foot">
+          <div class="buttons">
+            <a :href="modalContent.github" v-if="modalContent.github" target="_blank" class="button is-primary is-rounded">View on GitHub</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
 import GlobalHeader from "../components/GlobalHeader.vue";
 
 export default {
@@ -53,45 +48,90 @@ export default {
     return {
       isModalOpen: false,
       modalContent: {},
-      contentData: {
-        unti: {
+      portfolioItems: [
+        {
+          id: 1,
           title: 'うんち出たよと教え隊！',
+          date: '2018-06-01',
+          overview: '画像処理技術を用いたトイレ確認アプリの作成',
           description: '犬がトイレをしたかどうか確認するのが面倒だったため、画像認識技術を利用し、犬のトイレを検知するシステムを開発。犬がトイレをした後にはLINEに通知が来るようにした。',
           tech: ['Python', 'RaspberryPi', 'LINE Notify'],
           awards: ['第62回日本学生科学賞 入選2等'],
-          images: ['../static/unti/1.png', '../static/unti/2.png', '../static/unti/3.png']
+          thumbnail: 'unti/unti.png',
+          github: ''
         },
-        face: {
+        {
+          id: 2,
           title: '顔認識システム',
-          description: '画像処理技術を利⽤し顔認証による⼊室管理システムの開発を⾏なっている。従来のシステムで はバーコードやQRコードを利⽤するシステムが多いが紛失してしまった時にシステムが利⽤できな いなどまだまだ課題がある。さらに、このシステムでは⼊室時に、作成したフィルター機能によって顔にエフェクトをつけることができ、ただの顔認証システムではなく利⽤者が楽しんでもらえるような⼯夫をした。',
+          date: '2023-12-15',
+          overview: 'Python × OpenCVを用いた顔認証システムの作成。フィルター機能の搭載。',
+          description: '画像処理技術を利用し顔認証による入室管理システムの開発を行なっている。従来のシステムではバーコードやQRコードを利用するシステムが多いが紛失してしまった時にシステムが利用できないなどまだまだ課題がある。さらに、このシステムでは入室時に、作成したフィルター機能によって顔にエフェクトをつけることができ、ただの顔認証システムではなく利用者が楽しんでもらえるような工夫をした。',
           tech: ['Python', 'OpenCV', 'Javascript'],
           awards: ['なし'],
-          images: ['../static/face/face1.png', '../static/face/face2.png', '../static/face/face3.png', '../static/face/face4.png', '../static/face/face5.png'],
+          thumbnail: 'face/face1.png',
           github: 'https://github.com/matoi0317/face_recognition'
         },
-        syaberitai: {
+        {
+          id: 3,
           title: 'あなたとしゃべりたい',
-          description: '初めのアイデアとして、⾳声解析プログラムを作成した。祖⺟は気管⽀切開⼿術を受けており、わ ずかに漏れる「はっ」という⾳を利⽤してコミュニケーションを図るアイデアだった。しかしなが ら、環境⾳と混ざり合い、⾳声解析が難しいことが判明し、このアイデアは断念せざるを得なかっ た。次に、「まばたき」を⽤いてコミュニケーションを試みるアイデアが浮かんだ。祖⺟は唯⼀「ま ばたき」を⾃⼒で⾏える動作であり、⺟が以前から「テレビを⾒たいと思ったら⽬を閉じてみて」と いうような会話を祖⺟としていたことからアイデアを得た。画像解析プログラムを開発し、まばたき の回数に応じてコミュニケーションを取るアプリの開発を進めた。',
+          date: '2022-08-30',
+          overview: '音声認識技術を応用したコミュニケーションアプリの作成。LINEとの連携。',
+          description: '初めのアイデアとして、音声解析プログラムを作成した。祖母は気管支切開手術を受けており、わずかに漏れる「はっ」という音を利用してコミュニケーションを図るアイデアだった。しかしながら、環境音と混ざり合い、音声解析が難しいことが判明し、このアイデアは断念せざるを得なかった。次に、「まばたき」を用いてコミュニケーションを試みるアイデアが浮かんだ。祖母は唯一「まばたき」を自力で行える動作であり、母が以前から「テレビを見たいと思ったら目を閉じてみて」というような会話を祖母としていたことからアイデアを得た。画像解析プログラムを開発し、まばたきの回数に応じてコミュニケーションを取るアプリの開発を進めた。',
           tech: ['Python', 'Javascript', 'Vue.js'],
           awards: ['IBARAKIドリームパスアワード 最優秀賞', '第63回日本学生科学賞入選3等', '一般社団法人情報処理学会 初等中等教育委員会委員長賞'],
-          images: ['../static/syaberitai/1.png', '../static/syaberitai/2.png', '../static/syaberitai/3.png'],
+          thumbnail: 'syaberitai/syaberitai.png',
           github: 'https://github.com/matoi0317/eye_blink_communicator'
         },
-        wakarutte: {
+        {
+          id: 4,
           title: 'わかるって',
-          description: '⾼齢者などIT機器の操作に不慣れな⼈にとって、医療⽤アプリを操作することに抵抗を感じるかもしれない。そこで、⾃宅にいながら⾳声だけで体調管理ができるアプリがあれば便利なのではないかと考え開発を⾏うことにした。RaspberryPiの⾳声認識を⽤いた医療⽤カルテを作成するアプリを作成。これにより、在宅医療や通院している患者の⽇々の状況を電⼦カルテ化でき、診察時の効率化等に寄与できると考える。',
+          date: '2021-05-10',
+          overview: '音声認識技術を応用した体調管理アプリの作成',
+          description: '高齢者などIT機器の操作に不慣れな人にとって、医療用アプリを操作することに抵抗を感じるかもしれない。そこで、自宅にいながら音声だけで体調管理ができるアプリがあれば便利なのではないかと考え開発を行うことにした。RaspberryPiの音声認識を用いた医療用カルテを作成するアプリを作成。これにより、在宅医療や通院している患者の日々の状況を電子カルテ化でき、診察時の効率化等に寄与できると考える。',
           tech: ['Python', 'Javascript', 'RaspberryPi'],
           awards: ['JoyoHighSchoolテックコンテスト 優秀賞'],
-          images: ['../static/wakarutte/1.png', '../static/wakarutte/2.png', '../static/wakarutte/3.png'],
+          thumbnail: 'wakarutte/wakarutte.png',
           github: 'https://github.com/matoi0317/karute'
-        }
-      }
+        },
+        {
+          id: 5,
+          title: 'タイピングゲームのLP制作',
+          date: '2024-06-01',
+          overview: 'ユニークなイラストを用いたタイピングサイトのLP制作',
+          description: '高齢者などIT機器の操作に不慣れな人にとって、医療用アプリを操作することに抵抗を感じるかもしれない。そこで、自宅にいながら音声だけで体調管理ができるアプリがあれば便利なのではないかと考え開発を行うことにした。RaspberryPiの音声認識を用いた医療用カルテを作成するアプリを作成。これにより、在宅医療や通院している患者の日々の状況を電子カルテ化でき、診察時の効率化等に寄与できると考える。',
+          tech: ['Javascript', 'JTML', 'CSS'],
+          thumbnail: 'zudada/zudada.png',
+          github: 'https://github.com/matoi0317/karute'
+        },
+        {
+          id: 6,
+          title: '予備校の動画学習サイト制作',
+          date: '2024-05-01',
+          overview: 'エルステップを用いた生徒の管理、動画閲覧サイトの制作',
+          description: '高齢者などIT機器の操作に不慣れな人にとって、医療用アプリを操作することに抵抗を感じるかもしれない。そこで、自宅にいながら音声だけで体調管理ができるアプリがあれば便利なのではないかと考え開発を行うことにした。RaspberryPiの音声認識を用いた医療用カルテを作成するアプリを作成。これにより、在宅医療や通院している患者の日々の状況を電子カルテ化でき、診察時の効率化等に寄与できると考える。',
+          tech: ['Javascript', 'RaspberryPi'],
+          thumbnail: 'studybu/studybu.jpg',
+          github: 'https://github.com/matoi0317/karute'
+        },
+        // {
+        //   id: 7,
+        //   title: '富士通サマーインターン',
+        //   date: '2024-07-08',
+        //   overview: '富士通サマーインターン参加記録',
+        //   description: '今後追加予定',
+        //   thumbnail: '../static/zudada/zudada1.png',
+        // }
+      ]
     };
   },
+  computed: {
+    sortedPortfolioItems() {
+      return this.portfolioItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+  },
   methods: {
-    openModal(key) {
-      this.modalContent = this.contentData[key];
-    //   this.modalContent.images = this.modalContent.images.map(img => require(`${img}`));
+    openModal(item) {
+      this.modalContent = item;
       this.isModalOpen = true;
     },
     closeModal() {
@@ -102,77 +142,52 @@ export default {
 };
 </script>
 
-  
-<style scoped lang="scss">
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.container {
+<style scoped>
+.portfolio-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 50px;
-  width: 70%;
-  margin: 0 auto;
-
-  .main-image {
-    width: 100%;
-    animation: slide-in-left 1s ease-out;
-    cursor: pointer;
-  }
-
-  .side-images {
-    display: flex;
-    margin-top: 20px;
-    padding-bottom: 200px;
-
-    .vertical-images {
-      display: flex;
-      flex-direction: column;
-      margin-left: 20px;
-
-      .small-image {
-        width: 100%;
-        animation: slide-in-right 1s ease-out;
-        cursor: pointer;
-      }
-    }
-
-    .small-image {
-      width: 40%;
-      animation: slide-in-left 1s ease-out;
-      cursor: pointer;
-    }
-  }
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
 }
 
-/* スライドインアニメーションの定義 */
-@keyframes slide-in-left {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.portfolio-item {
+  width: 30%;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
-/* スライドインアニメーションの定義 */
-@keyframes slide-in-right {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.portfolio-item:hover {
+  transform: scale(1.05);
 }
 
-/* モーダルウィンドウのスタイル */
+.portfolio-thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.portfolio-details {
+  padding: 20px;
+}
+
+.portfolio-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.portfolio-date {
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.portfolio-description {
+  margin-bottom: 20px;
+}
+
 .modal {
   display: flex;
   justify-content: center;
@@ -183,40 +198,35 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  .modal-card {
-      .delete {
-          margin-right: 20px;
-      }
-      .modal-card-body {
-          padding: 30px;
-          h1 {
-              font-weight: bold;
-              font-size: 24px;
-          }
-          p {
-              text-indent: 1em;
-              padding: 10px 0;
-          }
-          li {
-              padding: 5px 0;
-          }
-      }
-      .modal-card-title {
-          padding: 30px 20px;
-          font-weight: bold;
-      }
-      .buttons {
-          display: flex;
-          justify-content: flex-end;
-          button {
-            padding: 10px;
-            margin: 10px;
-          }
-          a.button {
-            padding: 10px;
-            margin: 10px;
-          }
-      }
-  }
+}
+
+.modal-card {
+  width: 60%;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-card-title {
+  font-size: 1.5em;
+}
+
+.modal-card-body {
+  padding: 20px;
+}
+
+.modal-card-foot {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  border-top: 1px solid #ddd;
 }
 </style>

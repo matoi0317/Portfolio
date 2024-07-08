@@ -88,7 +88,7 @@ export default {
   .container-image {
     width: 30%;
     height: 80%;
-    background-color: red;
+    // background-color: red;
     border-radius: 50px;
     background-image: url("../static/me2.JPG");
     background-position: center;
