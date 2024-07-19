@@ -20,7 +20,8 @@ export default {
     height: 20%;
     display: flex;
     justify-content: flex-end;  
-    box-shadow: 0 4px 4px 0 rgba(160, 160, 160, 0.2);
+    // box-shadow: 0 4px 4px 0 rgba(160, 160, 160, 0.2);
+    background-color: #131415;
     .buttons {
         width: 50%;
         margin: 20px;

@@ -58,7 +58,7 @@ export default {
     height: 20%;
     display: flex;
     justify-content: flex-end;  
-    background-color: #221F1F;
+    background-color: #131415;
     .buttons {
         width: 50%;
         margin: 20px;
@@ -82,7 +82,7 @@ export default {
 .main-container {
   width: 100%;
   height: 100vh;
-  background-color: #221F1F;
+  background-color: #131415;
   display: flex;
   padding: 50px;
   .container-image {
@@ -100,13 +100,13 @@ export default {
     height: 80%;
     .name {
       font-weight: bold;
-      color: #A6BBCC;
+      color: #cccccc;
       font-size: 64px;
       font-family: "Archivo Black", sans-serif;
       margin: 0 0 0 40px;
     }
     p {
-      color: whitesmoke;
+      color: #757A86;
       width: 80%;
       text-indent: 1em;
       margin: 0 0 20px 40px;
@@ -116,7 +116,7 @@ export default {
       width: 100%;
       margin: 30px 40px 20px 40px;
       font-size: 36px;
-      color: #A6BBCC;
+      color: #cccccc;
       font-family: "Archivo Black", sans-serif;
       position: relative;
       &::after {
@@ -124,7 +124,7 @@ export default {
         display: block;
         width: 80%; /* 修正箇所 */
         height: 2px;
-        background-color: #A6BBCC;
+        background-color: #cccccc;
         position: absolute;
         bottom: 0; /* 修正箇所 */
         left: 0;
@@ -139,10 +139,10 @@ export default {
         width: 90%;
         li {
           padding: 10px 0;
-          color: #A6BBCC;
+          color: #cccccc;
         }
         .detail-title {
-          color: #A6BBCC;
+          color: #cccccc;
           font-family: "Archivo Black", sans-serif;
           font-size: 18px;
         }
@@ -153,13 +153,13 @@ export default {
       width: 100%;
       margin: 20px 40px;
       .another-title {
-        color: #A6BBCC;
+        color: #cccccc;
           font-family: "Archivo Black", sans-serif;
           font-size: 18px;
       }
       li {
           padding: 10px 0;
-          color: #A6BBCC;
+          color: #cccccc;
         }
     }
   }
